@@ -1,0 +1,30 @@
+services:
+  database:
+    build: ./database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: jingguang
+      POSTGRES_PASSWORD: 123123
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  voting:
+    build: ./cloudproject
+    ports:
+      - "6110:6110"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  result:
+    build: ./cloudproject02
+    ports:
+      - "6111:6111"
+    depends_on:
+      database:
+        condition: service_healthy

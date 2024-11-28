@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Results</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="/static/css/style2.css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Cat lovers🐱 VS. Dog lovers🐶</h1>
+			<div id="results"></div> <!-- 用于显示投票结果 -->
+				<div class="vote-container">
+					<div class="vote-option-cat">
+						<div class="vote-count-cats">Cats: 1 vote</div>
+						<!-- 用于显示投票结果 <span class="TextCats">Cats</span>-->
+						<center><span class="cat-percentage">100.0%</span></center>
+					</div>
+					<div class="vote-count-total">total: 1 vote</div>
+					<div class="vote-option-dog">
+						<div class="vote-count-dogs">Dogs: 0 vote</div>
+						<!-- <span class="TextDogs">Dogs</span>-->
+						<center><span class="dog-percentage">0.0%</span></center>
+					</div>
+				</div>
+			<button id="backButton">Thank you for voting!</button> <!-- 返回按钮 -->
+			</div>
+		<script src="/static/js/script_result.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=2.0">
+		<title>Cats or Dogs?</title>
+		<link rel="stylesheet" href="../static/css/style1.css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Choose your favorite animals below: </h1>
+            <button id="catButton" onclick="handleVote('cat')">🐱Cats</button>
+            <button id="dogButton" onclick="handleVote('dog')">🐶Dogs</button>
+{#			<button id="catButton">🐱Cats</button>#}
+{#			<button id="dogButton">🐶Dogs</button>#}
+		</div>
+
+
+
+    <script>
+        function handleVote(option) {
+            // 创建一个 XMLHttpRequest 对象
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/vote/', true);  // 这里是后端接收数据的 URL
+
+            // 设置请求头
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            // 监听请求的返回结果
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // 解析返回的数据
+                    var data = JSON.parse(xhr.responseText);
+                    alert(`你投票选择了: ${data.option}。`);
+                } else {
+                    console.error('请求失败，状态码:', xhr.status);
+                }
+            };
+
+            // 发送请求
+            var payload = JSON.stringify({ option: option });
+            xhr.send(payload);
+        }
+    </script>
+	</body>
+	<script src="static/js/script_vote.js"></script>
+	<script src="static/js/script_result.js"></script>
+
+</html>

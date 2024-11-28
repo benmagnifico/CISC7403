@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投票页面</title>
+</head>
+<body>
+    <h1>请选择你的投票选项：</h1>
+    <button onclick="handleVote('cat')">cat</button>
+    <button onclick="handleVote('dog')">dog</button>
+
+
+    <script>
+        function handleVote(option) {
+            // 创建一个 XMLHttpRequest 对象
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/sv/', true);  // 这里是后端接收数据的 URL
+
+            // 设置请求头
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            // 监听请求的返回结果
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // 解析返回的数据
+                    var data = JSON.parse(xhr.responseText);
+                    alert(`你投票选择了: ${data.option}。`);
+                } else {
+                    console.error('请求失败，状态码:', xhr.status);
+                }
+            };
+
+            // 发送请求
+            var payload = JSON.stringify({ option: option });
+            xhr.send(payload);
+        }
+    </script>
+</body>
+</html>
