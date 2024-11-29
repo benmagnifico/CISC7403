@@ -12,10 +12,7 @@ docker-compose up -d
 ```
 
 If you deploy the microservices locally, after the successful deployment, you can use `voting` on `http://127.0.0.1:6110/vote/`
-and get the `result` from `http://127.0.0.1:6111/result/`. 
-
-You can utilize `docker ps -a` to list all the containers and find the container ID of the voting container. 
-Then, you can check the running log with `docker logs [Container ID]`.
+and get the `result` from `http://127.0.0.1:6111/result/`. Also, you can check the running log with `docker logs cisc7403-voting-1`.
 
 ## Code Structure
 

@@ -96,35 +96,82 @@ def result(request):
 
 
 def sample(request):
+
     try:
         # 查询数据库中所有的投票选项
         # votes = Vote.objects.all()
         with connection.cursor() as cursor:
             cursor.execute("SELECT COUNT(*) FROM vote WHERE choice = %s", ['cat'])
             resultc = cursor.fetchone()
-            cursor.execute("SELECT choice, MAX(timestamp) AS latest_vote_time FROM vote GROUP BY choice")
 
+            # cursor.execute("SELECT choice, MAX(timestamp) AS latest_vote_time FROM app01_vote GROUP BY choice")
+            # ORDER BY CASE WHEN choice = 'cat' THEN 1 WHEN choice = 'dog' THEN 2 ELSE 3 END;
+            cursor.execute("SELECT choice, MAX(timestamp) AS latest_vote_time FROM vote GROUP BY choice ORDER BY CASE WHEN choice = 'cat' THEN 1 WHEN choice = 'dog' THEN 2 ELSE 3 END")
 
 
             alltime =cursor.fetchall()
-            print("all")
-            print(alltime[0][1])
-            print(alltime[1][1])
-
-            print(resultc[0])  # 猫
+            # if resultc is None:
+            #     resultc=0;
+            #     alltime[0][1]=''
+            # print("all")
+            # print(alltime[0][1])
+            # print(alltime[1][1])
+            #
+            # print(resultc[0])  # 猫
             cursor.execute("SELECT COUNT(*) FROM vote WHERE choice = %s", ['dog'])
             resultd = cursor.fetchone()  # 狗
+            print("ddog")
+            # print(resultd.shape)
+            # if resultd is None:
+            #     resultd[0]=0;
+            #     alltime[1][1]=''
             print(resultd[0])
-    except:
+            if resultc[0]==0 and resultd[0]==0:
+                result = {
+                    "catvote": 0,
+                    "dogvote": 0,
+                    "catpercent": "0%",
+                    "dogpercent": "0%",
+                    "total": 0,
+                    "timeCat": "No data",
+                    "timeDog": "No data"
+                }
+                return render(request, 'sample.html', {'results': result, })
+            if resultc[0]==0 and resultd[0]!=0:
+                result = {
+                    "catvote": 0,
+                    "dogvote": resultd[0],
+                    "catpercent": "0%",
+                    "dogpercent": "100%",
+                    "total": resultd[0],
+                    "timeCat": "No data",
+                    "timeDog": alltime[1][1]
+                }
+                return render(request, 'sample.html', {'results': result, })
+            if resultc[0]!=0 and resultd[0]==0:
+                result = {
+                    "catvote": resultc[0],
+                    "dogvote": 0,
+                    "catpercent": "100%",
+                    "dogpercent": "0%",
+                    "total": resultc[0],
+                    "timeCat": alltime[0][1],
+                    "timeDog": "No data"
+                }
+                return render(request, 'sample.html', {'results': result, })
+
+    except Exception as e:
         print("")
+        # print(f"Error occurred: {e}")
+
     result={
         "catvote":resultc[0],
         "dogvote":resultd[0],
         "catpercent":str(round((resultc[0]/(resultc[0]+resultd[0])*100), 2))+"%",
         "dogpercent": str(round((1-(resultc[0]/(resultc[0]+resultd[0])))*100,2))+"%",
         "total": resultc[0]+resultd[0],
-        "timeCat":alltime[1][1],
-        "timeDog":alltime[0][1]
+        "timeCat":alltime[0][1],
+        "timeDog":alltime[1][1]
 #"SELECT choice, MAX(timestamp) AS latest_vote_time FROM app01_vote GROUP BY choice"
     }
 

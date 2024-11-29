@@ -18,8 +18,8 @@ from django.urls import path
 from app01 import  views
 urlpatterns = [
     path('vote/', views.sv, name='vote'),  # 投票页面
-    path('vote/', views.log, name='log'),
+    # path('vote/', views.log, name='log'),
 
     # path('sv/', views.sv, name='sv'),
-    path('result', views.result, name='result'),  # 投票处理
+    # path('result', views.result, name='result'),  # 投票处理
 ]

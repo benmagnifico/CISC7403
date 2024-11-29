@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f6f7e3;
+}
+
+.container {
+    text-align: center;
+}
+
+button {
+    padding: 20px 40px;
+    margin: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #7dccbd;
+    color: white;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    font-size: 40px; /* 调小标题字体大小 */
+    margin-bottom: 20px; /* 标题与按钮间距 */
+}

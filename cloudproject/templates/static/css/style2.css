@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f6f7e3;
+}
+
+.container {
+	display: flex;
+	flex-direction: column; /* 垂直排列 */
+	align-items: center; /* 水平居中对齐 */
+	justify-content: center; /* 垂直居中对齐 */
+	height: 100vh; /* 充满整个视口高度 */
+}
+.vote-container{
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: space-between; /* 水平分散对齐 */
+    align-items: center; /* 垂直居中对齐 */
+}
+.vote-option-cat{
+	padding: 20px 40px;
+	margin: 20px;
+	font-size: 30px;
+	border: none;
+	border-radius: 10px;
+	background-color: #eeac0a;
+	color: white;
+}
+.vote-count-total{
+	padding: 40px 40px;
+	margin: 40px;
+	font-size: 30px;
+	border: none;
+	border-radius: 10px;
+	background-color: #afafaf;
+	color: white;
+}
+.vote-option-dog{
+	padding: 20px 40px;
+	margin: 20px;
+	font-size: 30px;
+	border: none;
+	border-radius: 10px;
+	background-color: #8c4a00;
+	color: white;
+}
+
+button {
+    padding: 20px 40px;
+    margin: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #7dccbd;
+    color: white;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    font-size: 40px; /* 调小标题字体大小 */
+    margin-bottom: 20px; /* 标题与按钮间距 */
+}
